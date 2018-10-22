@@ -36,7 +36,7 @@ public class Elevador {
         if(andar <= this.andar_max && andar >= this.andar_min){
             this.destinos.add(andar);
         }else{
-            System.out.println("Andar de destino errado");
+            System.out.println("Andar de destino errado. Por favor certifique-se que você esteja adicionando um andar existente.");
         }      
     }
     
