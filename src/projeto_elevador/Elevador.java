@@ -20,6 +20,9 @@ public class Elevador {
     private List<Integer> destinos;
     private int estadoMotor; // 0 = parado; 1 = subindo; -1 = descendo;
     private int andar_atual;
+    private int andar_destino;
+    private boolean aguardar_usuario;
+    private int cont_aux_escolha_usuario;
     
     public Elevador(int andar_min, int andar_max){
         this.andar_min = andar_min;
@@ -28,7 +31,10 @@ public class Elevador {
         this.ciclos = 0;
         this.destinos = new ArrayList<Integer>();
         this.estadoMotor = 0;
-        this.ciclo_atual = 0;
+        this.ciclo_atual = 3;
+        this.andar_destino = -1;
+        this.aguardar_usuario = false;
+        this.cont_aux_escolha_usuario = 0;
     }
     
     public void addDestino(int andar) {
@@ -53,37 +59,60 @@ public class Elevador {
     }
     
     public void atualizaStatus(){
-        if(this.ciclo_atual == this.ciclos -1){
-            this.ciclo_atual = -1;
-            if(this.estadoMotor == 1){
-                this.andar_atual++;
+        if(this.andar_destino != -1){
+            if(this.ciclo_atual == this.ciclos -1){
+                this.ciclo_atual = -1;
+                if(this.estadoMotor == 1){
+                    this.andar_atual++;
+                }
+                if(this.estadoMotor == -1){
+                    this.andar_atual--;
+                }   
+                if(this.estadoMotor == 0){
+                    if(!this.destinos.isEmpty()){
+                        this.andar_destino = this.destinos.remove(0);
+                        System.out.println("Movendo para: " + this.andar_destino);
+                    }else{
+                        this.andar_destino = -1;
+                        return;
+                    }
+                }
             }
-            if(this.estadoMotor == -1){
-                this.andar_atual--;
-            }
-            if(this.estadoMotor == 0){
-                this.destinos.remove(0);
-            }
-            if(this.ciclo_atual == -1){
-                try{
-                    System.out.println("Movendo para: " + this.destinos.get(0));
-                }catch(Exception e){System.exit(0);}
-            }
-        }
-        
-        try{        
-            if(this.destinos.get(0) > this.andar_atual){
+
+            if(this.andar_destino > this.andar_atual){
                 this.setSubir();
             }
-            if(this.destinos.get(0) < this.andar_atual){
+            if(this.andar_destino < this.andar_atual){
                 this.setDescer();
             }
-            if(this.destinos.get(0) == this.andar_atual){
+            if(this.andar_destino == this.andar_atual){
                 this.setParar();
+                System.out.println("Contador: " + this.cont_aux_escolha_usuario);
+                if(this.cont_aux_escolha_usuario == 2){
+                    this.cont_aux_escolha_usuario = 0;
+                    this.ciclo_atual = this.ciclos - 2;
+                }else{
+                    this.cont_aux_escolha_usuario ++;
+                }
+            }        
+            this.ciclo_atual++;
+        }else{
+            //System.out.println("Lista de Destinos Vazia!");
+            if(!this.destinos.isEmpty()){
+                this.andar_destino = this.destinos.remove(0);
+                System.out.println("Movendo para: " + this.andar_destino);
+                this.ciclo_atual = 1;    
+                if(this.andar_destino > this.andar_atual){
+                    this.setSubir();
+                }
+                if(this.andar_destino < this.andar_atual){
+                    this.setDescer();
+                }
+                if(this.andar_destino == this.andar_atual){
+                    this.setParar();
+                } 
             }
-        }catch(Exception e){}
-        
-        this.ciclo_atual++;
+        }
     }
     
     public String getEstadoMotor(){
@@ -93,7 +122,7 @@ public class Elevador {
         if(this.estadoMotor == -1){
             return "Descendo";
         }
-        if(this.estadoMotor == 0){
+        if(this.estadoMotor == 0 || this.andar_destino == -1){
             return "Parado";
         }
         return null;
@@ -108,9 +137,5 @@ public class Elevador {
     public void setNumeroCiclosPorAndar(int numerociclos){
         this.ciclos = numerociclos;
         
-    }
-            
-
-            
-            
-            }
+    }      
+}

@@ -14,16 +14,22 @@ public class Projeto_Elevador {
     public static void main(String[] args) throws InterruptedException {
         
         Elevador a1 = new Elevador(0,5);
-        
-        a1.addDestino(1);
-        a1.addDestino(3);
+        int aux = 0;
         a1.addDestino(5);
+        a1.addDestino(3);
         a1.addDestino(1);
+        a1.addDestino(2);
         a1.setNumeroCiclosPorAndar(4);
         while(true){
             a1.atualizaStatus();
             System.out.println(a1.toString());
             Thread.sleep(500);
+            aux += 500;
+            if(aux == 40 * 500){
+                a1.addDestino(3);
+                a1.addDestino(5);
+                a1.addDestino(3);
+            }
         }
         
     }
