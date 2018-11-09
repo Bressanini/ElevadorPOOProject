@@ -42,7 +42,7 @@ public class Elevador {
         if(andar <= this.andar_max && andar >= this.andar_min){
             this.destinos.add(andar);
         }else{
-            System.out.println("----p-");
+            System.out.println("Andar informado eh incorreto, por favor certifique-se que o numero informado esteja correto.");
         }      
     }
     
