@@ -87,7 +87,7 @@ public class Elevador {
             }
             if(this.andar_destino == this.andar_atual){
                 this.setParar();
-                System.out.println("Contador: " + this.cont_aux_escolha_usuario);
+               // System.out.println("Contador: " + this.cont_aux_escolha_usuario);
                 if(this.cont_aux_escolha_usuario == 2){
                     this.cont_aux_escolha_usuario = 0;
                     this.ciclo_atual = this.ciclos - 2;
