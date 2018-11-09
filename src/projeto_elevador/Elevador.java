@@ -42,7 +42,7 @@ public class Elevador {
         if(andar <= this.andar_max && andar >= this.andar_min){
             this.destinos.add(andar);
         }else{
-            System.out.println("-----");
+            System.out.println("----p-");
         }      
     }
     
