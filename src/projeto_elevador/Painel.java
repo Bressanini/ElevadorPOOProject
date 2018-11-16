@@ -38,10 +38,10 @@ public class Painel extends JPanel implements KeyListener, MouseListener{
         //elevador.addDestino(2);
         
         
-        this.display_s = new Display(50, 50, new Botoeira("", 4));
+        this.display_s = new Display(10, 10, new Botoeira("", 4));
         ArrayList<Botoeira> btns1 = new ArrayList<>();
         btns1.add(new Botoeira("", 2));
-        this.display = new DisplayComIndcadorAndar(400, 50, btns1);
+        this.display = new DisplayComIndcadorAndar(155, 10, btns1);
         ArrayList<Botoeira> btns2 = new ArrayList<>();
         
         for(int i = this.elevador.getAndarMin(); i <= this.elevador.getAndarMax(); i++){
@@ -51,7 +51,7 @@ public class Painel extends JPanel implements KeyListener, MouseListener{
                 btns2.add(new Botoeira(""+i, i));
             }
         }
-        this.display_ind = new DisplayComIndcadorAndar(750, 50, btns2);
+        this.display_ind = new DisplayComIndcadorAndar(300, 10, btns2);
         
     }
     
@@ -68,6 +68,13 @@ public class Painel extends JPanel implements KeyListener, MouseListener{
         
         this.display.paint(g2);
         this.display_ind.paint(g2);
+        
+        g2.setColor(Color.black);
+        g2.setFont(new Font("Arial", Font.ITALIC, 14));
+        g2.drawString("Trabalho do Curso de P.O.O.", 20, Projeto_Elevador.HEIGHT - 80);
+        g2.drawString("Franciele Kuwahara", 20, Projeto_Elevador.HEIGHT - 60);
+        g2.drawString("Gabriel Bressanini", 20, Projeto_Elevador.HEIGHT - 40);
+        g2.drawString("UFSC - Blumenau - 2018/2", 20, Projeto_Elevador.HEIGHT - 20);
         
     }
     private int cont = 0;

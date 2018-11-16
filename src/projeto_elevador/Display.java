@@ -25,15 +25,15 @@ public class Display {
     public Display(int x, int y, Botoeira botao){
         this.x = x;
         this.y = y;
-        this.width = 300;
+        this.width = 135;
         this.botoes = new ArrayList<>();
         
-        botao.setX(this.x + this.width/2 - 50);
-        botao.setY(this.y + this.width*8/10 + 100);
-        botao.setWidth(100);
-        botao.setHeight(100);
+        botao.setX(this.x + this.width/2 - 30);
+        botao.setY(this.y + 165);
+        botao.setWidth(60);
+        botao.setHeight(60);
         botoes.add(botao);
-        this.height = 300 + 200;
+        this.height = this.width*8/10 + 155;
         
         
         this.indicador_sentido = new IndicadorSentido((int)(this.x + this.width/10),
@@ -46,16 +46,16 @@ public class Display {
     public Display(int x, int y, ArrayList<Botoeira> botoes, IndicadorSentido indicador_sentido){
         this.x = x;
         this.y = y;
-        this.width = 300;
-        this.height = 300 * 2 + botoes.size() * 200;        
+        this.width = 135;
+        this.height = 135 * 2 + botoes.size() * 100;        
         this.botoes = botoes;
         this.indicador_sentido = indicador_sentido;
         
         for(int i = 0; i < this.botoes.size(); i++){
-            botoes.get(i).setX(this.x + this.width/2 - 50);
-            botoes.get(i).setY(this.y + 650 + 200*i);
-            botoes.get(i).setWidth(100);
-            botoes.get(i).setHeight(100);
+            botoes.get(i).setX(this.x + this.width/2 - 30);
+            botoes.get(i).setY(this.y + 285 + 100*i);
+            botoes.get(i).setWidth(60);
+            botoes.get(i).setHeight(60);
         }
     }
     

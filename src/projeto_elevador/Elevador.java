@@ -44,10 +44,10 @@ public class Elevador {
         this.aguardar_usuario = false;
         this.cont_aux_escolha_usuario = 0;
         
-        this.x = x;
-        this.y = y;
+        this.x = Projeto_Elevador.WIDTH - width;
+       // this.y = y;
         this.height = (int)(Projeto_Elevador.HEIGHT / (this.andar_max - this.andar_min +1));
-    this.y = Projeto_Elevador.HEIGHT - this.height;
+        this.y = Projeto_Elevador.HEIGHT - this.height;
         this.width = width;
     }
     
@@ -210,9 +210,9 @@ public class Elevador {
             g2.fillRect((int) (Projeto_Elevador.WIDTH - this.width*0.3), (int) (this.y + this.height*0.2), (int) (this.width*0.2), (int) (this.height*0.8));
         
         }
-        g2.setFont(new Font("Arial", Font.BOLD, 30));
-        g2.drawString("Destinos: ", Projeto_Elevador.WIDTH/2, 100);
-        g2.drawString(this.toString(), Projeto_Elevador.WIDTH/2, 150);
+        g2.setFont(new Font("Arial", Font.BOLD, 15));
+        g2.drawString("Destinos: ", Projeto_Elevador.WIDTH/2, 50);
+        g2.drawString(this.toString(), Projeto_Elevador.WIDTH/2, 80);
         for(int i = 0; i < this.destinos.size(); i++){ 
             g2.drawString(this.destinos.get(i)+" ", Projeto_Elevador.WIDTH/2 + 200 + i*30, 100);
         }

@@ -15,18 +15,18 @@ import javax.swing.JFrame;
  */
 public class Projeto_Elevador {
 
-    public static final int WIDTH = 2880;
-    public static final int HEIGHT = 1700;
+    public static final int WIDTH = 1280;//2880;
+    public static final int HEIGHT = 768;//1700;
 
     public static void main(String[] args) throws InterruptedException {
-        Elevador a1 = new Elevador(0,5, 100, 100, 100, 250);
+        /*Elevador a1 = new Elevador(0,5, 100, 100, 100, 250);
         int aux = 0;
         a1.addDestino(5);
         a1.addDestino(3);
         a1.addDestino(1);
         a1.addDestino(2);
         a1.setNumeroCiclosPorAndar(4);
-        /*while(true){
+        while(true){
             a1.atualizaStatus();
             System.out.println(a1.toString());
             Thread.sleep(500);

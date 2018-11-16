@@ -33,7 +33,7 @@ public class IndicadorAndarAtual {
     public void paint(Graphics2D g2){
         g2.setColor(Color.gray);
         g2.fillRect(x, y, widht, height);        
-        g2.setFont(new Font("Arial", Font.BOLD, 200));
+        g2.setFont(new Font("Arial", Font.BOLD, 100));
         g2.setColor(Color.GREEN);
         if(this.andar_atual < 10){
             g2.drawString(""+this.andar_atual, (int) (x + this.widht/3.8), y + this.height*4/5);

@@ -54,7 +54,7 @@ public class Botoeira{
                 (int)(width*0.8),
                 (int)(height*0.8));
         
-        g2.setFont(new Font("Arial", Font.BOLD, 72));
+        g2.setFont(new Font("Arial", Font.BOLD, 40));
         g2.setColor(Color.yellow);
         if(this.getIdentificador().length()>1){
             g2.drawString("" + this.identificador, x + this.width*1/12, (int) (y + this.height*7.5/10));
