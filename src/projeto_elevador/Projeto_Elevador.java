@@ -56,7 +56,7 @@ public class Projeto_Elevador {
         while(true){
             winPanel.repaint();
             winPanel.update();
-            Thread.sleep(33);
+            Thread.sleep(100);
         }
     }
     

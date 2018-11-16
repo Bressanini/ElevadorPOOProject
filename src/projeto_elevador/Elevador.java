@@ -78,6 +78,12 @@ public class Elevador {
     
     public void atualizaStatus(){
         if(this.andar_destino != -1){
+            if(this.estadoMotor == 1){
+                this.y -= (Projeto_Elevador.HEIGHT/(this.andar_max - this.andar_min + 1)) / (this.ciclos);
+            }
+            if(this.estadoMotor == -1){
+                this.y += (Projeto_Elevador.HEIGHT/(this.andar_max - this.andar_min + 1) / (this.ciclos));
+            }
             if(this.ciclo_atual == this.ciclos -1){
                 this.ciclo_atual = -1;
                 if(this.estadoMotor == 1){
@@ -118,16 +124,8 @@ public class Elevador {
                     this.cont_aux_escolha_usuario ++;
                 }
             }        
-            
-        
-            if(this.estadoMotor == 1){
-                this.y -= (Projeto_Elevador.HEIGHT/(this.andar_max - this.andar_min + 1)) / this.ciclos;
-            }
-            if(this.estadoMotor == -1){
-                this.y += (Projeto_Elevador.HEIGHT/(this.andar_max - this.andar_min + 1) / this.ciclos);
-            }
-            
             this.ciclo_atual++;
+            
         }else{
             //System.out.println("Lista de Destinos Vazia!");
             if(!this.destinos.isEmpty()){
@@ -136,9 +134,11 @@ public class Elevador {
                 this.ciclo_atual = 1;    
                 if(this.andar_destino > this.andar_atual){
                     this.setSubir();
+                    this.y -= (Projeto_Elevador.HEIGHT/(this.andar_max - this.andar_min + 1)) / (this.ciclos);
                 }
                 if(this.andar_destino < this.andar_atual){
                     this.setDescer();
+                    this.y += (Projeto_Elevador.HEIGHT/(this.andar_max - this.andar_min + 1)) / (this.ciclos);
                 }
                 if(this.andar_destino == this.andar_atual){
                     this.setParar();

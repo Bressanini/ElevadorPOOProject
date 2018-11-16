@@ -30,12 +30,12 @@ public class Painel extends JPanel implements KeyListener, MouseListener{
     
     public Painel(int min, int max){
         this.elevador = new Elevador(min, max, 2500, 100, 200, 250);
-        elevador.setNumeroCiclosPorAndar(4);
-        elevador.addDestino(0);
+        elevador.setNumeroCiclosPorAndar(5);
+        //elevador.addDestino(0);
         //elevador.addDestino(2);
         //elevador.addDestino(1);
-        elevador.addDestino(3);
-        elevador.addDestino(2);
+        //elevador.addDestino(3);
+        //elevador.addDestino(2);
         
         
         this.display_s = new Display(50, 50, new Botoeira("", 4));
@@ -72,15 +72,15 @@ public class Painel extends JPanel implements KeyListener, MouseListener{
     }
     private int cont = 0;
     public void update() throws InterruptedException{
-        if(cont > 500){
+        //if(cont > 500){
             this.elevador.atualizaStatus();
             this.display.update(elevador);
             this.display_ind.update(elevador);
             this.display_s.update(elevador);
-            cont = 0;
+          //  cont = 0;
         //Thread.sleep(1000);
-        }
-        cont += 33;
+        //}
+        //cont += 33;
     }
 
     @Override
