@@ -5,6 +5,8 @@
  */
 package projeto_elevador;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,12 @@ public class Elevador {
     private boolean aguardar_usuario;
     private int cont_aux_escolha_usuario;
     
-    public Elevador(int andar_min, int andar_max){
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    
+    public Elevador(int andar_min, int andar_max, int x, int y, int width, int height){
         this.andar_min = andar_min;
         this.andar_max = andar_max;
         this.andar_atual = 0;
@@ -35,6 +42,11 @@ public class Elevador {
         this.andar_destino = -1;
         this.aguardar_usuario = false;
         this.cont_aux_escolha_usuario = 0;
+        
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
     
     public void addDestino(int andar) {
@@ -138,4 +150,11 @@ public class Elevador {
         this.ciclos = numerociclos;
         
     }      
+    
+    public void paint(Graphics2D g2){
+        g2.setColor(Color.darkGray);
+        g2.fillRect(this.x, this.y, this.width, this.height);
+        g2.drawString("State: " + this.estadoMotor, this.x + this.width/2 - 10,
+                this.y - 25);
+    }
 }

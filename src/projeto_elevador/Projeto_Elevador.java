@@ -5,22 +5,27 @@
  */
 package projeto_elevador;
 
+import java.awt.Dimension;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Franciele Kuwahara, Gabriel Bressanini
  */
 public class Projeto_Elevador {
 
+    public static final int WIDTH = 2880;
+    public static final int HEIGHT = 1700;
+
     public static void main(String[] args) throws InterruptedException {
-        
-        Elevador a1 = new Elevador(0,5);
+        Elevador a1 = new Elevador(0,5, 100, 100, 100, 250);
         int aux = 0;
         a1.addDestino(5);
         a1.addDestino(3);
         a1.addDestino(1);
         a1.addDestino(2);
         a1.setNumeroCiclosPorAndar(4);
-        while(true){
+        /*while(true){
             a1.atualizaStatus();
             System.out.println(a1.toString());
             Thread.sleep(500);
@@ -30,8 +35,27 @@ public class Projeto_Elevador {
                 a1.addDestino(5);
                 a1.addDestino(3);
             }
-        }
+        }*/
         
+        JFrame window = new JFrame("Elevador - Curso de Programacao Orientada a Objetos");
+        
+        window.setResizable(false);
+        window.setUndecorated(true);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setSize(new Dimension(Projeto_Elevador.WIDTH, Projeto_Elevador.HEIGHT));
+        window.setLocationRelativeTo(null);
+        Painel winPanel = new Painel(0, 10);
+        
+        window.add(winPanel);
+        window.setVisible(true);
+        
+        window.addKeyListener(winPanel);
+        
+        while(true){
+            winPanel.repaint();
+            winPanel.update();
+            Thread.sleep(33);
+        }
     }
     
 }
