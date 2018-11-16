@@ -6,6 +6,7 @@
 package projeto_elevador;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class Elevador {
     public Elevador(int andar_min, int andar_max, int x, int y, int width, int height){
         this.andar_min = andar_min;
         this.andar_max = andar_max;
-        this.andar_atual = 0;
+        this.andar_atual = this.andar_min;
         this.ciclos = 0;
         this.destinos = new ArrayList<Integer>();
         this.estadoMotor = 0;
@@ -45,8 +46,9 @@ public class Elevador {
         
         this.x = x;
         this.y = y;
+        this.height = (int)(Projeto_Elevador.HEIGHT / (this.andar_max - this.andar_min +1));
+    this.y = Projeto_Elevador.HEIGHT - this.height;
         this.width = width;
-        this.height = height;
     }
     
     public void addDestino(int andar) {
@@ -60,6 +62,10 @@ public class Elevador {
     
     public void setSubir(){
         this.estadoMotor = 1;
+    }
+    
+    public int getAndarAtual(){
+        return this.andar_atual;
     }
     
     public void setDescer(){
@@ -81,6 +87,11 @@ public class Elevador {
                     this.andar_atual--;
                 }   
                 if(this.estadoMotor == 0){
+                    for(int i = 0; i < this.destinos.size(); i++){
+                        if(this.destinos.get(i) == this.andar_destino){
+                            this.destinos.remove(i);
+                        }
+                    }
                     if(!this.destinos.isEmpty()){
                         this.andar_destino = this.destinos.remove(0);
                         System.out.println("Movendo para: " + this.andar_destino);
@@ -107,6 +118,15 @@ public class Elevador {
                     this.cont_aux_escolha_usuario ++;
                 }
             }        
+            
+        
+            if(this.estadoMotor == 1){
+                this.y -= (Projeto_Elevador.HEIGHT/(this.andar_max - this.andar_min + 1)) / this.ciclos;
+            }
+            if(this.estadoMotor == -1){
+                this.y += (Projeto_Elevador.HEIGHT/(this.andar_max - this.andar_min + 1) / this.ciclos);
+            }
+            
             this.ciclo_atual++;
         }else{
             //System.out.println("Lista de Destinos Vazia!");
@@ -139,6 +159,10 @@ public class Elevador {
         }
         return null;
     }
+    
+    public int getEstadoMotor_int(){
+        return this.estadoMotor;
+    }
 
     @Override
     public String toString() {
@@ -147,14 +171,62 @@ public class Elevador {
     }
     
     public void setNumeroCiclosPorAndar(int numerociclos){
-        this.ciclos = numerociclos;
-        
+        this.ciclos = numerociclos;        
     }      
     
     public void paint(Graphics2D g2){
+        //Andares
+        g2.setFont(new Font("Arial", Font.BOLD, 55));
         g2.setColor(Color.darkGray);
-        g2.fillRect(this.x, this.y, this.width, this.height);
-        g2.drawString("State: " + this.estadoMotor, this.x + this.width/2 - 10,
-                this.y - 25);
+        for(int i = andar_min; i <= this.andar_max; i++){
+            g2.fillRect(Projeto_Elevador.WIDTH - 2*this.width,
+                    Projeto_Elevador.HEIGHT - Projeto_Elevador.HEIGHT/(this.andar_max-this.andar_min + 1)*(i-andar_min),
+                    2*this.width,
+                    10);
+            g2.drawString(""+i, Projeto_Elevador.WIDTH - 2*this.width,
+                    Projeto_Elevador.HEIGHT - Projeto_Elevador.HEIGHT/(this.andar_max-this.andar_min + 1)*(i-andar_min));
+        }
+        
+        g2.setColor(Color.white);
+        g2.setFont(new Font("Arial", Font.BOLD, 28));
+        g2.drawString("Elevador", Projeto_Elevador.WIDTH - this.width*4/5,this.y);
+         
+        g2.setColor(Color.black);
+        g2.fillRect(Projeto_Elevador.WIDTH - this.width, (int) (this.y + this.height*0.1), this.width, (int) (this.height*0.9));
+        g2.setColor(Color.DARK_GRAY);
+        g2.fillRect((int) (Projeto_Elevador.WIDTH - this.width*0.95), (int) (this.y + this.height*0.15), (int) (this.width), (int) (this.height*0.85));
+        if(this.estadoMotor == 0){
+            g2.setColor(Color.orange);
+            g2.fillRect((int) (Projeto_Elevador.WIDTH - this.width*0.7), (int) (this.y + this.height*0.2),
+                    (int) (this.width*0.4), (int) (this.height*0.8));
+            g2.setColor(Color.black);
+            g2.fillRect((int) (Projeto_Elevador.WIDTH - this.width*0.9), (int) (this.y + this.height*0.2), (int) (this.width*0.1), (int) (this.height*0.8));
+            g2.fillRect((int) (Projeto_Elevador.WIDTH - this.width*0.2), (int) (this.y + this.height*0.2),
+                    (int) (this.width*0.1), (int) (this.height*0.8));
+        
+        }else{
+            g2.setColor(Color.black);
+            g2.fillRect((int) (Projeto_Elevador.WIDTH - this.width*0.9), (int) (this.y + this.height*0.2), (int) (this.width*0.2), (int) (this.height*0.8));
+            g2.fillRect((int) (Projeto_Elevador.WIDTH - this.width*0.3), (int) (this.y + this.height*0.2), (int) (this.width*0.2), (int) (this.height*0.8));
+        
+        }
+        g2.setFont(new Font("Arial", Font.BOLD, 30));
+        g2.drawString("Destinos: ", Projeto_Elevador.WIDTH/2, 100);
+        g2.drawString(this.toString(), Projeto_Elevador.WIDTH/2, 150);
+        for(int i = 0; i < this.destinos.size(); i++){ 
+            g2.drawString(this.destinos.get(i)+" ", Projeto_Elevador.WIDTH/2 + 200 + i*30, 100);
+        }
+        
+    }
+    
+    public int getAndarMin(){
+        return this.andar_min;
+    }
+    public int getAndarMax(){
+        return this.andar_max;
+    }
+    
+    public List<Integer> getDestinos(){
+        return this.destinos;
     }
 }

@@ -6,6 +6,7 @@
 package projeto_elevador;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
@@ -31,9 +32,14 @@ public class IndicadorAndarAtual {
 
     public void paint(Graphics2D g2){
         g2.setColor(Color.gray);
-        g2.fillRect(x, y, widht, height);
-        g2.setColor(Color.red);
-        g2.drawString(""+this.andar_atual, x + this.widht/3, y + this.height*2/3);
+        g2.fillRect(x, y, widht, height);        
+        g2.setFont(new Font("Arial", Font.BOLD, 200));
+        g2.setColor(Color.GREEN);
+        if(this.andar_atual < 10){
+            g2.drawString(""+this.andar_atual, (int) (x + this.widht/3.8), y + this.height*4/5);
+        }else{
+            g2.drawString(""+this.andar_atual, (int) (x + this.widht/20), y + this.height*4/5);
+        }
     }
     
     public int getAndar_atual() {

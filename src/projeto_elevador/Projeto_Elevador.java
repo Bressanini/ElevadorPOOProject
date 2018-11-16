@@ -6,6 +6,7 @@
 package projeto_elevador;
 
 import java.awt.Dimension;
+import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 /**
@@ -44,12 +45,13 @@ public class Projeto_Elevador {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(new Dimension(Projeto_Elevador.WIDTH, Projeto_Elevador.HEIGHT));
         window.setLocationRelativeTo(null);
-        Painel winPanel = new Painel(0, 10);
+        Painel winPanel = new Painel(0, 4);
         
         window.add(winPanel);
         window.setVisible(true);
         
         window.addKeyListener(winPanel);
+        window.addMouseListener(winPanel);
         
         while(true){
             winPanel.repaint();
