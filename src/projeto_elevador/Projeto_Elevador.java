@@ -6,7 +6,9 @@
 package projeto_elevador;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.MouseListener;
+import javafx.scene.control.ScrollBar;
 import javax.swing.JFrame;
 
 /**
@@ -45,18 +47,17 @@ public class Projeto_Elevador {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(new Dimension(Projeto_Elevador.WIDTH, Projeto_Elevador.HEIGHT));
         window.setLocationRelativeTo(null);
-        Painel winPanel = new Painel(0, 4);
-        
+        Painel winPanel = new Painel(0, 4, 4);
+        winPanel.scrollRectToVisible(new Rectangle(Projeto_Elevador.WIDTH, Projeto_Elevador.HEIGHT));
         window.add(winPanel);
         window.setVisible(true);
         
-        window.addKeyListener(winPanel);
         window.addMouseListener(winPanel);
         
         while(true){
             winPanel.repaint();
             winPanel.update();
-            Thread.sleep(100);
+            Thread.sleep(500);
         }
     }
     

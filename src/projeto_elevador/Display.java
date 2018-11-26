@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author gabri
  */
-public class Display {
+public class Display implements auxInterface{
     protected ArrayList<Botoeira> botoes;
     protected IndicadorSentido indicador_sentido;
     
@@ -21,8 +21,10 @@ public class Display {
     private int y;
     private int width;
     private int height;
+    private boolean isVisible;
     
-    public Display(int x, int y, Botoeira botao){
+    public Display(int x, int y, Botoeira botao, boolean isVisible){
+        this.isVisible = isVisible;
         this.x = x;
         this.y = y;
         this.width = 135;
@@ -43,7 +45,8 @@ public class Display {
         
     }
     
-    public Display(int x, int y, ArrayList<Botoeira> botoes, IndicadorSentido indicador_sentido){
+    public Display(int x, int y, boolean isVisible, ArrayList<Botoeira> botoes, IndicadorSentido indicador_sentido){
+        this.isVisible = isVisible;
         this.x = x;
         this.y = y;
         this.width = 135;
@@ -59,6 +62,7 @@ public class Display {
         }
     }
     
+    @Override
     public void paint(Graphics2D g2){
         g2.setColor(Color.black);
         g2.fillRoundRect(x, y, width, height, width/10, width/10);
@@ -70,6 +74,7 @@ public class Display {
         }
     }
     
+    @Override
     public void update(Elevador elevador){
         this.indicador_sentido.setSentido(elevador.getEstadoMotor_int());
         
@@ -85,4 +90,12 @@ public class Display {
     public ArrayList<Botoeira> getBotoes(){
             return this.botoes;
     }
+    
+    public boolean isVisible(){
+        return this.isVisible;
+    }
+    public void setVisible(boolean b){
+        this.isVisible = b;
+    }
+
 }

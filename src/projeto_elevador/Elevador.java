@@ -211,10 +211,10 @@ public class Elevador {
         
         }
         g2.setFont(new Font("Arial", Font.BOLD, 15));
-        g2.drawString("Destinos: ", Projeto_Elevador.WIDTH/2, 50);
-        g2.drawString(this.toString(), Projeto_Elevador.WIDTH/2, 80);
+        g2.drawString("Destinos: ", Projeto_Elevador.WIDTH/2, 30);
+        g2.drawString(this.toString(), Projeto_Elevador.WIDTH/2 + 100, 30);
         for(int i = 0; i < this.destinos.size(); i++){ 
-            g2.drawString(this.destinos.get(i)+" ", Projeto_Elevador.WIDTH/2 + 200 + i*30, 100);
+           // g2.drawString(this.destinos.get(i)+" ", Projeto_Elevador.WIDTH/2 + 200 + i*30, 50);
         }
         
     }
@@ -229,4 +229,14 @@ public class Elevador {
     public List<Integer> getDestinos(){
         return this.destinos;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    
+    
 }

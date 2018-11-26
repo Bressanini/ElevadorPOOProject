@@ -17,8 +17,8 @@ public class DisplayComIndcadorAndar extends Display{
     private IndicadorAndarAtual indicador_andar;
     private int width;
 
-    public DisplayComIndcadorAndar(int x, int y, ArrayList<Botoeira> botoes) {
-        super(x, y, botoes, new IndicadorSentido((int)(x + 135/10),
+    public DisplayComIndcadorAndar(int x, int y, ArrayList<Botoeira> botoes, boolean isVisible) {
+        super(x, y, isVisible, botoes, new IndicadorSentido((int)(x + 135/10),
                 (int)(y + 150),(135*8/10), (int)(135*8/10)));
         this.width = 135;
         this.indicador_andar = new IndicadorAndarAtual((int)(x + this.width/10),
